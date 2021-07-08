@@ -5,6 +5,15 @@ function App() {
 
 	console.log(val);
 
+	const getDynamicJson = async (page) => {
+		const jsonFilePath = `./jsons/json${page}.json`
+		const jsonFile = await require(`${jsonFilePath}`)
+		return jsonFile
+	}
+
+	const json1 = getDynamicJson(1);
+	const json2 = getDynamicJson(2);
+
 	return (
 		<div className="container mt-2">
 			<h1> Hello </h1>
@@ -14,6 +23,10 @@ function App() {
 				val = localStorage["Test"];
 				console.log(val);
 			}}/>
+
+			{json1}
+			{json2}
+
 		</div>
 	);
 }
