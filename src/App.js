@@ -1,6 +1,10 @@
+import React, { useState } from 'react';
+
 import { TextField } from '@material-ui/core';
 
 function App() {
+	const [title, setTitle] = useState("")
+
 	let val = localStorage["Test"];
 
 	console.log(val);
@@ -8,11 +12,8 @@ function App() {
 	const getDynamicJson = async (page) => {
 		const jsonFilePath = `./jsons/json${page}.json`
 		const jsonFile = await require(`${jsonFilePath}`)
-		return jsonFile
+		setTitle(jsonFile.title);
 	}
-
-	const json1 = getDynamicJson(1);
-	const json2 = getDynamicJson(2);
 
 	return (
 		<div className="container mt-2">
@@ -22,10 +23,17 @@ function App() {
 				localStorage["Test"] = e.target.value;
 				val = localStorage["Test"];
 				console.log(val);
+
+				if (val === "hello1"){
+					getDynamicJson(1)
+				}
+
+				if (val === "hello2"){
+					getDynamicJson(2)
+				}
 			}}/>
 
-			{json1}
-			{json2}
+			{title}
 
 		</div>
 	);
